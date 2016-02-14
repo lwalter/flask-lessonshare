@@ -1,0 +1,41 @@
+<div layout="row" ng-cloak>
+    <md-sidenav md-is-locked-open="true" class="lesson-plan-nav md-whiteframe-4dp">
+        <md-list>
+            <md-list-item ng-repeat="plan in lpCtrl.lessonPlans">
+                <md-button ng-click="lpCtrl.selectPlan($index)" ng-class="{ 'selected' : plan === lpCtrl.selected }">// plan.title //</md-button>
+            </md-list-item>
+            <md-list-item>
+                <md-button ng-click="lpCtrl.showDialog($event)">
+                    Create a new lesson plan
+                </md-button>
+            </md-list-item>
+        </md-list>
+    </md-sidenav>
+    <md-content id="content" ng-if="lpCtrl.selected">
+        <md-content ng-show="!lpCtrl.isEditing">
+            <section layout="row" layout-sm="column" layout-wrap>
+                <h2>// lpCtrl.selected.title //</h2>
+                <md-button layout-align="center center" ng-click="lpCtrl.editLessonPlan()">Edit</md-button>
+                <md-button layout-align="center center" ng-click="lpCtrl.deleteLessonPlan()">Delete</md-button>
+            </section>
+            <p>// lpCtrl.selected.description //</p>
+        </md-content>
+        <form id="editLessonPlanForm" ng-show="lpCtrl.isEditing" layout-sm="column" layout-wrap>
+            <section layout="row">
+                <input type="text" ng-model="lpCtrl.selected.title" ng-required/>
+                <md-button class="btn" type="submit" ng-click="lpCtrl.submitEditLessonPlan()">Save</md-button>
+                <md-button layout-align="center center" ng-click="lpCtrl.deleteLessonPlan()">Delete</md-button>
+            </section>
+            <input type="text" ng-model="lpCtrl.selected.description" ng-required/>
+        </form>
+
+
+        <form id="createLessonItem">
+            <section layout="row">
+                <label>Content: </label>
+                <input type="text" ng-model="lpCtrl.lessonItem.content" ng-required/>
+                <md-button class="btn" type="submit" ng-click="lpCtrl.insertLessonItem()">Add lesson item</md-button>
+            </section>
+        </form>
+    </md-content>
+</div>

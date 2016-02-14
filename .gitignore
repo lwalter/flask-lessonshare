@@ -1,0 +1,5 @@
+flask
+lessonshare/static/libs
+*.idea
+*pyc
+*.vagrant

@@ -1,0 +1,36 @@
+<div layout="flex" layout-align="center center" layout-padding="50" id="content">
+    <md-content layout="row">
+        <form id="userRegisterForm" name="userRegisterForm" ng-submit="uaCtrl.register()">
+            <md-input-container class="md-block">
+                <label>First name</label>
+                <input class="auth-input" name="firstName" type="text" ng-model="uaCtrl.user.firstName" required>
+                <div ng-messages="userRegisterForm.firstName.$error">
+                    <div ng-message="required">Your first name is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Last name</label>
+                <input class="auth-input" name="lastName" type="text" ng-model="uaCtrl.user.lastName" required>
+                <div ng-messages="userRegisterForm.lastName.$error">
+                    <div ng-message="required">Your last name is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Email</label>
+                <input class="auth-input" name="email" type="email" ng-model="uaCtrl.user.email" required>
+                <div ng-messages="userRegisterForm.email.$error">
+                    <div ng-message="required">Your email is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Password</label>
+                <input class="auth-input" name="password" type="password" ng-model="uaCtrl.user.password" required>
+                <div ng-messages="userRegisterForm.password.$error">
+                    <div ng-message="required">A password is required.</div>
+                </div>
+            </md-input-container>
+            <md-button class="md-raised" type="submit">Register</md-button>
+            <h5>Already have an account? <a href="/login">Login here</a></h5>
+        </form>
+    </md-content>
+</div>

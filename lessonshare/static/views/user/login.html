@@ -1,0 +1,22 @@
+<div layout="flex" layout-align="center center" layout-padding="50" id="content" ng-cloak>
+    <md-content layout="row">
+        <form id="userLoginForm" name="userLoginForm" ng-submit="uaCtrl.login()">
+            <md-input-container class="md-block">
+                <label>Email</label>
+                <input class="auth-input" name="email" type="email" ng-model="uaCtrl.user.email" required>
+                <div ng-messages="userLoginForm.email.$error">
+                    <div ng-message="required">An email address is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Password</label>
+                <input class="auth-input" name="password" type="password" ng-model="uaCtrl.user.password" required>
+                <div ng-messages="userLoginForm.password.$error">
+                    <div ng-message="required">A password is required.</div>
+                </div>
+            </md-input-container>
+            <md-button class="md-raised" type="submit">Login</md-button>
+            <h5>Don't have an account? <a href="/register">Register here</a></h5>
+        </form>
+    </md-content>
+</div>

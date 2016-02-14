@@ -1,0 +1,24 @@
+md-sidenav.lesson-plan-nav {
+    height: 100%;
+    position: fixed;
+}
+
+md-list-item > button {
+    width:100%;
+    text-align:left !important;
+}
+
+md-list .md-button.selected {
+    color: #03a9f4;
+}
+
+md-sidenav  md-list {
+    padding: 0px 0px 8px 0px;
+}
+
+#content {
+    overflow: hidden;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 5px;
+}

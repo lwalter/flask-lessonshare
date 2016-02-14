@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask-LessonShare</title>
+    <base href="/">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    {% assets "css_libs" %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
+
+    {% assets "custom_css" %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
+
+    {% assets "js_libs" %}
+        <script src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+
+    {% assets "js_angular" %}
+        <script src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+</head>
+<body ng-app="LessonShareApp">
+    <div ng-controller="NavbarController as navCtrl">
+        <md-content>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>
+                      <a href="/"><span>Flask-LessonShare</span></a>
+                    </h2>
+                    <md-menu>
+                        <md-button aria-label="Open menu" class="md-button" ng-click="$mdOpenMenu($event)">
+                            // navCtrl.userLoggedIn() === true ? navCtrl.currentUser : "Login" //
+                        </md-button>
+                        <md-menu-content width="4">
+                            <md-menu-item ng-if="navCtrl.userLoggedIn() == false">
+                                <md-button ng-href="/login">
+                                    Login
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item ng-if="navCtrl.userLoggedIn() == false">
+                                <md-button ng-href="/register">
+                                    Register
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item ng-if="navCtrl.userLoggedIn() == true">
+                                <md-button ng-controller="UserAuthController as uaCtrl" ng-click="uaCtrl.logout()">
+                                    Logout
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </div>
+            </md-toolbar>
+        </md-content>
+    </div>
+    <div ng-view="" layout="column"></div>
+</body>
+</html>

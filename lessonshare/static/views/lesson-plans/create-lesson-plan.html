@@ -1,0 +1,21 @@
+<md-dialog aria-label="Create a new lesson plan"  ng-cloak>
+    <form name="lessonPlanForm">
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <h2>Create a new lesson plan</h2>
+                <md-input-container>
+                    <label>Title</label>
+                    <input id="title" ng-model="createCtrl.lessonPlan.title" required="true">
+                </md-input-container>
+                <md-input-container>
+                    <label>Description</label>
+                    <input id="description" ng-model="createCtrl.lessonPlan.description" required="true">
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button class="md-raised" ng-click="createCtrl.cancel()">Cancel</md-button>
+            <md-button class="md-raised" ng-click="createCtrl.createLessonPlan()">Create plan</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
