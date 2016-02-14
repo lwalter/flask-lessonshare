@@ -19,6 +19,14 @@
                 <md-button layout-align="center center" ng-click="lpCtrl.deleteLessonPlan()">Delete</md-button>
             </section>
             <p>// lpCtrl.selected.description //</p>
+
+            <section layout="row" layout-sm="column" layout-wrap>
+                <md-list>
+                    <md-list-item ng-repeat="item in lpCtrl.lessonItems">
+                        <h4>// item.content //</h4>
+                    </md-list-item>
+                </md-list>
+            </section>
         </md-content>
         <form id="editLessonPlanForm" ng-show="lpCtrl.isEditing" layout-sm="column" layout-wrap>
             <section layout="row">

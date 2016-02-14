@@ -110,7 +110,6 @@
 
             $http.post('/api/lessonitems/' + lessonPlanId, lessonItem)
                 .then(function (result) {
-                    console.log(result);
                     if (result.status === 201 && result.data) {
                         deferred.resolve(result);
                     } else {
@@ -118,7 +117,6 @@
                     }
                 })
                 .catch(function (error) {
-                    console.log(result);
                     deferred.reject(error);
                 });
 

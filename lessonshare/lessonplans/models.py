@@ -12,7 +12,6 @@ class LessonPlans(CRUDMixin, BaseRecordMixin, db.Model):
 
     lesson_items = db.relationship('LessonItems', backref=db.backref('lesson_items'), lazy='dynamic')
 
-
     def __init__(self, title, description):
         super(self.__class__, self).__init__()
 
@@ -35,6 +34,6 @@ class LessonPlans(CRUDMixin, BaseRecordMixin, db.Model):
         }
 
     @staticmethod
-    def getSerializedPlansByOwner(owner_id):
+    def get_serialized_plans_by_owner(owner_id):
         user_lesson_plans = LessonPlans.query.filter_by(created_by=owner_id).order_by(LessonPlans.created_at.desc())
         return [plan.serialize for plan in user_lesson_plans]

@@ -7,7 +7,7 @@ class LessonPlansAPI(Resource):
     decorators = [jwt_required()]
 
     def get(self):
-        return LessonPlans.getSerializedPlansByOwner(current_identity.id), 200
+        return LessonPlans.get_serialized_plans_by_owner(current_identity.id), 200
 
     def post(self):
 
@@ -25,7 +25,7 @@ class LessonPlansAPI(Resource):
         except Exception, e:
             return {'description': 'Server encountered an error.'}, 500
 
-        return LessonPlans.getSerializedPlansByOwner(current_identity.id), 201
+        return LessonPlans.get_serialized_plans_by_owner(current_identity.id), 201
 
     def delete(self, id):
 
@@ -42,7 +42,7 @@ class LessonPlansAPI(Resource):
         except Exception, e:
             return {'description': 'Server encountered an error.'}, 500
 
-        return LessonPlans.getSerializedPlansByOwner(current_identity.id), 200
+        return LessonPlans.get_serialized_plans_by_owner(current_identity.id), 200
 
     def put(self, id):
 

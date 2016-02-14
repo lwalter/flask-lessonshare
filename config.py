@@ -8,7 +8,6 @@ class Config(object):
     ASSETS_DEBUG = False
 
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
-    #SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 
     SECRET_KEY = os.environ['SECRET_KEY']
 
@@ -21,7 +20,7 @@ class Config(object):
     SERVICES_PATH = JS_PATH.format('services/{0}')
     JS_LIB_PATH = 'libs/{0}'
     CSS_PATH = 'css/{0}'
-    CSS_LIB_PATH = JS_LIB_PATH.format('/angular-material/{0}')
+    CSS_LIB_PATH = JS_LIB_PATH.format('angular-material/{0}')
 
 
 class Development(Config):

@@ -45,7 +45,7 @@ assets.register('css_libs', css_libs)
 from lessonshare.home.views import home
 from lessonshare.user.api import UserApi, user_auth, authenticate, identity, payload_handler
 from lessonshare.lessonplans.api import LessonPlansAPI
-from lessonshare.lessonitems.api import LessonItemAPI
+from lessonshare.lessonitems.api import LessonItemsAPI
 
 
 jwt = JWT(app, authenticate, identity)
@@ -57,4 +57,4 @@ app.register_blueprint(user_auth)
 
 api.add_resource(UserApi, '/api/user', endpoint='user')
 api.add_resource(LessonPlansAPI, '/api/lessonplans', '/api/lessonplans/<int:id>', endpoint='lessonplans')
-api.add_resource(LessonItemAPI, )
+api.add_resource(LessonItemsAPI, '/api/lessonitems/<int:lesson_plan_id>', endpoint='lessonitems')

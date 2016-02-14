@@ -56,10 +56,11 @@
                     return config;
                 },
                 responseError: function (response) {
+                    // Redirect to login when user is not logged in.
                     if (!$localStorage.userFirstName && (response.status === 401 || response.status === 403)) {
                         var ToastService = $injector.get('ToastService');
                         delete $localStorage.userFirstName;
-                        ToastService.setToastParams('You must be logged in to do that.', 'warning-toast', "#userLoginForm");
+                        ToastService.setToastParams('You must be logged in to do that.', 'warning-toast', '#userLoginForm');
                         $location.path('/login');
                         return $q.reject(response);
                     }

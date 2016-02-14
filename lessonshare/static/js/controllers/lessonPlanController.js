@@ -9,22 +9,24 @@
         self.lessonPlans = [];
         self.isEditing = false;
 
-        // LessonItem vars
         self.lessonItem = null;
         self.lessonItems = [];
 
+        // Load initial data.
         LessonPlanService.getLessonPlans()
             .then(function (result) {
                 self.lessonPlans = result.data;
                 self.selected = self.lessonPlans[0];
 
-                LessonPlanService.getLessonItems(self.selected.id)
-                    .then(function (result) {
-                        self.lessonItems = result.data;
-                    })
-                    .catch(function (error) {
-                        ToastService.setParamsAndDisplay(error.data.description, 'warning-toast', '#content');
-                    })
+                if (self.selected) {
+                     LessonPlanService.getLessonItems(self.selected.id)
+                         .then(function (result) {
+                            self.lessonItems = result.data;
+                        })
+                        .catch(function (error) {
+                            ToastService.setParamsAndDisplay(error.data.description, 'warning-toast', '#content');
+                        })
+                }
             })
             .catch(function (error) {
                 ToastService.setParamsAndDisplay(error.data.description, 'warning-toast', '#content');
@@ -77,6 +79,16 @@
                 });
         };
 
+        self.insertLessonItem = function () {
+            LessonPlanService.insertLessonItem(self.lessonItem, self.selected.id)
+                .then(function (result) {
+                    self.lessonItems = result.data;
+                })
+                .catch(function (error) {
+                    ToastService.setParamsAndDisplay(error.data.description, 'warning-toast', '#content');
+                });
+        };
+
         self.showDialog = function (event) {
             $mdDialog.show({
                 controller: 'CreateLessonPlanController',
@@ -90,31 +102,6 @@
                 .then(function (planList) {
                     self.lessonPlans = planList;
                     self.selected = self.lessonPlans[0];
-                });
-        };
-
-        // LessonItem functions
-        /* TODO(lnw) might not need this function.
-        self.getLessonItems = function () {
-            LessonPlanService.getLessonItems(self.selected.id)
-                .then(function (result) {
-                    console.log(result);
-                    self.lessonItems = result.data.lessonItems;
-                })
-                .catch(function (error) {
-                    ToastService.setParamsAndDisplay(error.data.description, 'warning-toast', '#content');
-                });
-        };
-        */
-
-        self.insertLessonItem = function () {
-            LessonPlanService.insertLessonItem(self.lessonItem, self.selected.id)
-                .then(function (result) {
-                    self.lessonItems = result.data.lessonItems;
-                    // Todo(lnw) above might change
-                })
-                .catch(function (error) {
-                    ToastService.setParamsAndDisplay(error.data.description, 'warning-toast', '#content');
                 });
         };
     };
