@@ -23,7 +23,7 @@ class LessonPlansAPI(Resource):
         try:
             new_lesson_plan.save()
         except Exception, e:
-            return {'description': 'Server encountered an error.'}, 500
+            return {'description': 'The lesson plan could not be created.'}, 500
 
         return LessonPlans.get_serialized_plans_by_owner(current_identity.id), 201
 
@@ -32,10 +32,13 @@ class LessonPlansAPI(Resource):
         if not id:
             return {'description': 'No id provided.'}, 400
 
-        lesson_plan = LessonPlans.query.filter_by(created_by=current_identity.id, id=id).first()
+        lesson_plan = LessonPlans.query.get(id)
 
         if not lesson_plan:
-            return {'description': 'You are not the owner of this lesson plan.'}, 403
+            return {'description': 'No lesson plan exists with that id.'}, 400
+
+        if lesson_plan.created_by != current_identity.id:
+            return {'description': 'You cannot modify that lesson plan.'}, 403
 
         try:
             lesson_plan.delete()
@@ -55,10 +58,13 @@ class LessonPlansAPI(Resource):
 
         args = reqparser.parse_args()
 
-        lesson_plan = LessonPlans.query.filter_by(created_by=current_identity.id, id=id).first()
+        lesson_plan = LessonPlans.query.get(id)
 
         if not lesson_plan:
-            return {'description': 'You are not the owner of this lesson plan.'}, 403
+            return {'description': 'No lesson plan exists with that id.'}, 400
+
+        if lesson_plan.created_by != current_identity.id:
+            return {'description': 'You cannot modify that lesson plan.'}, 403
 
         try:
             title = args.get('title', None)

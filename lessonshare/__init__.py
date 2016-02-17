@@ -57,4 +57,4 @@ app.register_blueprint(user_auth)
 
 api.add_resource(UserApi, '/api/user', endpoint='user')
 api.add_resource(LessonPlansAPI, '/api/lessonplans', '/api/lessonplans/<int:id>', endpoint='lessonplans')
-api.add_resource(LessonItemsAPI, '/api/lessonitems/<int:lesson_plan_id>', endpoint='lessonitems')
+api.add_resource(LessonItemsAPI, '/api/lessonitems/<int:id>', endpoint='lessonitems')

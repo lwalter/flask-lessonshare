@@ -51,7 +51,7 @@ def login():
         return jsonify({'description': 'Invalid credentials.'}), 401
 
     auth_token = user.generate_auth_token()
-    return jsonify({'token': auth_token.decode('ascii')})
+    return jsonify({'token': auth_token.decode('ascii')}), 200
 
 
 class UserApi(Resource):

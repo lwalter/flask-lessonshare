@@ -19,14 +19,6 @@
                 <md-button layout-align="center center" ng-click="lpCtrl.deleteLessonPlan()">Delete</md-button>
             </section>
             <p>// lpCtrl.selected.description //</p>
-
-            <section layout="row" layout-sm="column" layout-wrap>
-                <md-list>
-                    <md-list-item ng-repeat="item in lpCtrl.lessonItems">
-                        <h4>// item.content //</h4>
-                    </md-list-item>
-                </md-list>
-            </section>
         </md-content>
         <form id="editLessonPlanForm" ng-show="lpCtrl.isEditing" layout-sm="column" layout-wrap>
             <section layout="row">
@@ -36,14 +28,30 @@
             </section>
             <input type="text" ng-model="lpCtrl.selected.description" ng-required/>
         </form>
-
-
-        <form id="createLessonItem">
-            <section layout="row">
-                <label>Content: </label>
-                <input type="text" ng-model="lpCtrl.lessonItem.content" ng-required/>
-                <md-button class="btn" type="submit" ng-click="lpCtrl.insertLessonItem()">Add lesson item</md-button>
+        <md-content>
+            <section layout="row" layout-sm="column" layout-wrap>
+                <md-list>
+                    <md-list-item ng-repeat="item in lpCtrl.lessonItems" class="md-3-line md-long-text">
+                        <md-divider ></md-divider>
+                        <div class="md-list-item-text">
+                            <h3>// item.title //</h3>
+                            <p>// item.content //</p>
+                        </div>
+                        <md-button class="lesson-item-delete" ng-click="lpCtrl.deleteLessonItem(item.id)"><i class="material-icons">delete</i></md-button>
+                    </md-list-item>
+                </md-list>
             </section>
+        </md-content>
+        <form id="createLessonItem" layout="row">
+            <md-input-container class="md-block">
+                <label>Title: </label>
+                <input type="text" ng-model="lpCtrl.newLessonItem.title" ng-required/>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Content: </label>
+                <input type="text" ng-model="lpCtrl.newLessonItem.content" ng-required/>
+            </md-input-container>
+            <md-button class="btn" type="submit" ng-click="lpCtrl.insertLessonItem()">Add lesson item</md-button>
         </form>
     </md-content>
 </div>

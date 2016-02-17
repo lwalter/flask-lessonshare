@@ -9,7 +9,7 @@
         self.lessonPlans = [];
         self.isEditing = false;
 
-        self.lessonItem = null;
+        self.newLessonItem = null;
         self.lessonItems = [];
 
         // Load initial data.
@@ -22,7 +22,7 @@
                      LessonPlanService.getLessonItems(self.selected.id)
                          .then(function (result) {
                             self.lessonItems = result.data;
-                        })
+                         })
                         .catch(function (error) {
                             ToastService.setParamsAndDisplay(error.data.description, 'warning-toast', '#content');
                         })
@@ -39,6 +39,16 @@
             }
 
             self.selected = angular.isNumber(index) ? self.lessonPlans[index] : null;
+
+            if (self.selected) {
+                LessonPlanService.getLessonItems(self.selected.id)
+                    .then(function (result) {
+                        self.lessonItems = result.data;
+                    })
+                    .catch(function (error) {
+                        ToastService.setParamsAndDisplay(error.data.description, 'warning-toast', '#content');
+                    });
+            }
         };
 
         self.deleteLessonPlan = function (event) {
@@ -80,9 +90,19 @@
         };
 
         self.insertLessonItem = function () {
-            LessonPlanService.insertLessonItem(self.lessonItem, self.selected.id)
+            LessonPlanService.insertLessonItem(self.newLessonItem, self.selected.id)
                 .then(function (result) {
                     self.lessonItems = result.data;
+                })
+                .catch(function (error) {
+                    ToastService.setParamsAndDisplay(error.data.description, 'warning-toast', '#content');
+                });
+        };
+
+        self.deleteLessonItem = function (lessonItemId) {
+            LessonPlanService.deleteLessonItem(lessonItemId)
+                .then(function (result) {
+                   self.lessonItems = result.data;
                 })
                 .catch(function (error) {
                     ToastService.setParamsAndDisplay(error.data.description, 'warning-toast', '#content');

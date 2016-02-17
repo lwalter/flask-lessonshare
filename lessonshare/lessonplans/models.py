@@ -10,7 +10,8 @@ class LessonPlans(CRUDMixin, BaseRecordMixin, db.Model):
     description = db.Column(db.String(500), nullable=False)
     likes = db.Column(db.Integer)
 
-    lesson_items = db.relationship('LessonItems', backref=db.backref('lesson_items'), lazy='dynamic')
+    lesson_items = db.relationship('LessonItems', backref=db.backref('lesson_items'), cascade='all, delete-orphan',
+                                   lazy='dynamic')
 
     def __init__(self, title, description):
         super(self.__class__, self).__init__()

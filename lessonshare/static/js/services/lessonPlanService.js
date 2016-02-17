@@ -10,7 +10,8 @@
             deleteLessonPlan: deleteLessonPlan,
             editLessonPlan: editLessonPlan,
             insertLessonItem: insertLessonItem,
-            getLessonItems: getLessonItems
+            getLessonItems: getLessonItems,
+            deleteLessonItem: deleteLessonItem
         };
 
         function getLessonPlans() {
@@ -105,10 +106,10 @@
             return deferred.promise;
         }
 
-        function insertLessonItem(lessonItem, lessonPlanId) {
+        function insertLessonItem(newLessonItem, lessonPlanId) {
             var deferred = $q.defer();
 
-            $http.post('/api/lessonitems/' + lessonPlanId, lessonItem)
+            $http.post('/api/lessonitems/' + lessonPlanId, newLessonItem)
                 .then(function (result) {
                     if (result.status === 201 && result.data) {
                         deferred.resolve(result);
@@ -122,6 +123,25 @@
 
             return deferred.promise;
         }
+
+        function deleteLessonItem(lessonItemId) {
+            var deferred = $q.defer();
+
+            $http.delete('/api/lessonitems/' + lessonItemId)
+                .then(function (result) {
+                    if (result.status === 200 && result.data) {
+                        deferred.resolve(result);
+                    } else {
+                        deferred.reject(result);
+                    }
+                })
+                .catch(function (error) {
+                    deferred.reject(error);
+                });
+
+            return deferred.promise;
+        }
+
     };
 
     LessonPlanSrvc.$inject = injectDeps;
