@@ -93,6 +93,8 @@
             LessonPlanService.insertLessonItem(self.newLessonItem, self.selected.id)
                 .then(function (result) {
                     self.lessonItems = result.data;
+                    self.newLessonItem = '';
+                    $scope.$$childTail.createLessonItemForm.$setPristine();
                 })
                 .catch(function (error) {
                     ToastService.setParamsAndDisplay(error.data.description, 'warning-toast', '#content');
@@ -100,12 +102,23 @@
         };
 
         self.deleteLessonItem = function (lessonItemId) {
-            LessonPlanService.deleteLessonItem(lessonItemId)
-                .then(function (result) {
-                   self.lessonItems = result.data;
-                })
-                .catch(function (error) {
-                    ToastService.setParamsAndDisplay(error.data.description, 'warning-toast', '#content');
+            var confirmDialog = $mdDialog.confirm()
+              .title('Are you sure?')
+              .textContent('This lesson item and its contents will be deleted forever.')
+              .ariaLabel('Delete')
+              .targetEvent(event)
+              .ok('Delete')
+              .cancel('Cancel');
+
+            $mdDialog.show(confirmDialog)
+                .then(function () {
+                    LessonPlanService.deleteLessonItem(lessonItemId)
+                        .then(function (result) {
+                           self.lessonItems = result.data;
+                        })
+                        .catch(function (error) {
+                            ToastService.setParamsAndDisplay(error.data.description, 'warning-toast', '#content');
+                        });
                 });
         };
 

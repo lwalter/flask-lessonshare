@@ -22,7 +22,3 @@ md-sidenav  md-list {
     padding-right: 40px;
     padding-top: 5px;
 }
-
-md-button .lesson-item-delete {
-    float: right
-}
