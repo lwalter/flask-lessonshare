@@ -9,7 +9,6 @@
         self.lessonPlans = [];
         self.isEditing = false;
 
-        self.newLessonItem = null;
         self.lessonItems = [];
 
         // Load initial data.
@@ -89,18 +88,6 @@
                 });
         };
 
-        self.insertLessonItem = function () {
-            LessonPlanService.insertLessonItem(self.newLessonItem, self.selected.id)
-                .then(function (result) {
-                    self.lessonItems = result.data;
-                    self.newLessonItem = '';
-                    $scope.$$childTail.createLessonItemForm.$setPristine();
-                })
-                .catch(function (error) {
-                    ToastService.setParamsAndDisplay(error.data.description, 'warning-toast', '#content');
-                });
-        };
-
         self.deleteLessonItem = function (lessonItemId) {
             var confirmDialog = $mdDialog.confirm()
               .title('Are you sure?')
@@ -122,7 +109,7 @@
                 });
         };
 
-        self.showDialog = function (event) {
+        self.showCreatePlanDialog = function (event) {
             $mdDialog.show({
                 controller: 'CreateLessonPlanController',
                 controllerAs: 'createCtrl',
@@ -137,6 +124,24 @@
                     self.selected = self.lessonPlans[0];
                 });
         };
+
+        self.showCreateItemDialog = function (event) {
+            $mdDialog.show({
+                controller: 'CreateLessonItemController',
+                controllerAs: 'createCtrl',
+                templateUrl: 'static/views/lesson-plans/create-lesson-item.html',
+                parent: angular.element(document.body),
+                targetEvent: event,
+                clickOutsideToClose: false,
+                locals: {
+                    planId: self.selected.id
+                },
+                fullscreen: false
+            })
+                .then(function (itemList) {
+                    self.lessonItems = itemList;
+                });
+        }
     };
 
     LessonPlanCtrl.$inject = injectDeps;

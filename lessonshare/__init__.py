@@ -18,10 +18,11 @@ bcrypt = Bcrypt(app)
 assets = Environment(app)
 
 js = Bundle('js/lessonShareApp.js',
-            Config.CONTROLLERS_PATH.format('createPlanController.js'), Config.CONTROLLERS_PATH.format('lessonPlanController.js'),
-            Config.CONTROLLERS_PATH.format('navbarController.js'), Config.CONTROLLERS_PATH.format('toastController.js'),
-            Config.CONTROLLERS_PATH.format('userAuthenticationController.js'), Config.SERVICES_PATH.format('lessonPlanService.js'),
-            Config.SERVICES_PATH.format('toastService.js'), Config.SERVICES_PATH.format('userAuthenticationService.js'),
+            Config.CONTROLLERS_PATH.format('createItemController.js'), Config.CONTROLLERS_PATH.format('createPlanController.js'),
+            Config.CONTROLLERS_PATH.format('lessonPlanController.js'), Config.CONTROLLERS_PATH.format('navbarController.js'),
+            Config.CONTROLLERS_PATH.format('toastController.js'), Config.CONTROLLERS_PATH.format('userAuthenticationController.js'),
+            Config.SERVICES_PATH.format('lessonPlanService.js'), Config.SERVICES_PATH.format('toastService.js'),
+            Config.SERVICES_PATH.format('userAuthenticationService.js'),
             filters='jsmin', output='jsBundle.js')
 
 css = Bundle(Config.CSS_PATH.format('index.css'), Config.CSS_PATH.format('lesson-plan.css'), Config.CSS_PATH.format('toast.css'),

@@ -6,7 +6,7 @@
                     <md-button ng-click="lpCtrl.selectPlan($index)" ng-class="{ 'selected' : plan === lpCtrl.selected }">// plan.title //</md-button>
                 </md-list-item>
                 <md-list-item>
-                    <md-button ng-click="lpCtrl.showDialog($event)">
+                    <md-button ng-click="lpCtrl.showCreatePlanDialog($event)">
                         Create a new lesson plan
                     </md-button>
                 </md-list-item>
@@ -43,19 +43,11 @@
                             <md-button ng-click="lpCtrl.deleteLessonItem(item.id)"><md-icon class="material-icons">delete</md-icon></md-button>
                         </div>
                     </md-list-item>
+                    <md-list-item>
+                        <md-button ng-click="lpCtrl.showCreateItemDialog($event)">Add lesson item</md-button>
+                    </md-list-item>
                 </md-list>
             </section>
-            <form name="createLessonItemForm" id="createLessonItem" layout="row" ng-submit="lpCtrl.insertLessonItem()">
-                <md-input-container class="md-block">
-                    <label>Title: </label>
-                    <input type="text" ng-model="lpCtrl.newLessonItem.title" ng-required/>
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <label>Content: </label>
-                    <input type="text" ng-model="lpCtrl.newLessonItem.content" ng-required/>
-                </md-input-container>
-                <md-button class="md-raised" type="submit">Add lesson item</md-button>
-            </form>
         </div>
     </div>
 </div>
